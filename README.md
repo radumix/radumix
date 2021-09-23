@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @radumix
+- 👋 Hi, I’m radumix
 - 👀 I’m interested in ui developer
 - 🌱 I’m currently learning android java
 - 💞️ I’m looking to collaborate
