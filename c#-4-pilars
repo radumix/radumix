@@ -1,0 +1,118 @@
+c# 4 pilars: Abstraction, Encapsulation, Inheritance, Polymorphism
+
+1. What Is Encapsulation:
+Encapsulation is a process of binding data members (variables, properties) and member functions (methods) together. In object oriented programming language we achieve encapsulation through Class.
+
+Public Class Account  
+{  
+       private double balance;  
+       public double GetBalance()  
+       {  
+         return balance;  
+       }  
+}  
+//Imagine main as outside world  
+public static void Main()  
+{  
+        Account obj=new Account();  
+        double currentBalance=obj.GetBalance();  
+   
+        //Following thing is not possible  since that data member is private   
+        obj.balance=20000000000;  
+}  
+
+
+2. What Is Abstraction:
+Abstraction is the process of showing only essential/necessary features of an entity/object to the outside world and hide the other irrelevant information.
+
+class Car  
+{  
+     public string Brakes {get;set}  
+     //Gear is exposed using the public access modifier.  
+     public string Gear{ get;set;}  
+     public string Steering {get;set;}  
+  
+  
+     private void Exhaust_System()  
+     {  
+       ………..  
+     }  
+     //Hided using the Private Access modifier  
+     private void What_happen_we_he_change _the_Gear_of_car()  
+     {  
+       ………..  
+     }  
+     private void Silencer()  
+     {  
+        ……...  
+     }  
+}  
+
+3. What Is Inheritance:
+The process of creating the new class by extending the the existing class is called inheritance or the process of inheriting the features of base class is called as inheritance.
+
+//suppose initially I wrote a base class shape as   
+class Shape  
+{  
+     public int width;  
+     public int height;  
+     public void SetWidth(int w)  
+     {  
+        width=w;  
+     }  
+     public void SetHeight(int h)  
+     {  
+        height=h;  
+     }  
+}  
+  
+  
+//derived class rectangle  
+class Rectangle:Shape  
+{  
+       public int GetArea()  
+       {  
+ return width*height;  
+}   
+   
+}  
+
+class Tester  
+{  
+      static void Main()  
+      {  
+          //Derived class object  
+          Rectangle obj=new Rectangle();  
+          obj.SetWidth(5);  
+          obj.SetHeight(10);  
+          Console.WriteLine(“Area of rectangle is {}”,obj.GetArea());  
+          Console.Read()  
+      }  
+}  
+
+
+4. What Is Polymorphism:
+Poly means many and Morph means forms. Polymorphism is the process in which an object or function take different forms.
+
+//Implementation of polymorphism using method overloading  
+class Base  
+{  
+      public int Add(int num1,int num2)  
+      {  
+              return(num1+num2);  
+       }  
+      public int Add(double num1,double num2)  
+      {  
+              return(num1+num2);  
+      }   
+}  
+class Program  
+{  
+      public static void Main()  
+      {  
+            Base obj=new Base();  
+            Console.WriteLine(“Addition of two integer number is ”+obj.Add(4,5));  
+            Console.WriteLine(“Addition of two float number is ”+obj.Add(6.78,5.23));  
+    
+       }  
+}  
