@@ -1,0 +1,4 @@
+Class and Interface Different sheet:
+A class is a blueprint for creating objects. It defines the properties, methods, events, and other members that a particular type will have.
+
+An interface is a contract that defines a set of members (methods, properties, events) that a class must implement if it declares that it implements the interface.
