@@ -19,65 +19,127 @@ in .NET
 Confluent.Kafka
 NuGet: Confluent.Kafka
 dotnet add package Confluent.Kafka
-2. Create a Producer (send messages)
+Create a Producer and Consumer
+"Kafka": {
+    "BootstrapServers": "kafka.company.com:9092",
+    "Topic": "test-topic",
+    "GroupId": "sample-consumer-group"
+  }
+
 using Confluent.Kafka;
 
-var config = new ProducerConfig
+public class KafkaProducerService : IKafkaProducerService
 {
-    BootstrapServers = "localhost:9092"
-};
+    private readonly IProducer<string, string> _producer;
+    private readonly string _topic;
 
-using var producer = new ProducerBuilder<string, string>(config).Build();
+    public KafkaProducerService(
+        IProducer<string, string> producer,
+        IConfiguration config)
+    {
+        _producer = producer;
+        _topic = config["Kafka:Topic"]!;
+    }
 
-while (true)
-{
-    Console.Write("Enter message: ");
-    var value = Console.ReadLine();
-
-    var message = new Message<string, string> { Key = "key1", Value = value };
-
-    var result = await producer.ProduceAsync("demo-topic", message);
-
-    Console.WriteLine($"Sent '{value}' to partition {result.Partition} at offset {result.Offset}");
+    public async Task SendAsync(string message)
+    {
+        await _producer.ProduceAsync(
+            _topic,
+            new Message<string, string> { Value = message }
+        );
+    }
 }
 using Confluent.Kafka;
 
-var config = new ConsumerConfig
+public class KafkaConsumerService : BackgroundService
 {
-    BootstrapServers = "localhost:9092",
-    GroupId = "demo-group",
-    AutoOffsetReset = AutoOffsetReset.Earliest
-};
+    private readonly IConfiguration _config;
+    private readonly ILogger<KafkaConsumerService> _logger;
+    private readonly IConsumer<string, string> _consumer;
+    private readonly string _topic;
 
-using var consumer = new ConsumerBuilder<string, string>(config).Build();
+    public KafkaConsumerService(
+        IConfiguration config,
+        ILogger<KafkaConsumerService> logger)
+    {
+        _config = config;
+        _logger = logger;
 
-consumer.Subscribe("demo-topic");
+        var consumerConfig = new ConsumerConfig
+        {
+            BootstrapServers = _config["Kafka:BootstrapServers"],
+            GroupId = _config["Kafka:GroupId"],
+            AutoOffsetReset = AutoOffsetReset.Earliest,
+            EnableAutoCommit = true
+        };
 
-Console.WriteLine("Listening...");
+        _topic = _config["Kafka:Topic"]!;
+        _consumer = new ConsumerBuilder<string, string>(consumerConfig).Build();
+        _consumer.Subscribe(_topic);
+    }
 
-while (true)
-{
-    var result = consumer.Consume();
-    Console.WriteLine($"Received: {result.Message.Value} (key: {result.Message.Key})");
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        _logger.LogInformation("Kafka consumer started...");
+
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            try
+            {
+                var message = _consumer.Consume(stoppingToken);
+                _logger.LogInformation($"[Kafka] Received message: {message.Message.Value}");
+            }
+            catch (ConsumeException ex)
+            {
+                _logger.LogError($"Kafka error: {ex.Error.Reason}");
+            }
+        }
+
+        _consumer.Close();
+    }
 }
+----
 using Confluent.Kafka;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
-var config = new ConsumerConfig
+var builder = WebApplication.CreateBuilder(args);
+
+// Load Kafka settings
+var kafkaBootstrap = builder.Configuration["Kafka:BootstrapServers"];
+
+// -----------------------
+// Register Kafka Producer
+// -----------------------
+builder.Services.AddSingleton(new ProducerConfig
 {
-    BootstrapServers = "localhost:9092",
-    GroupId = "demo-group",
-    AutoOffsetReset = AutoOffsetReset.Earliest
-};
+    BootstrapServers = kafkaBootstrap
+});
 
-using var consumer = new ConsumerBuilder<string, string>(config).Build();
-
-consumer.Subscribe("demo-topic");
-
-Console.WriteLine("Listening...");
-
-while (true)
+builder.Services.AddSingleton<IProducer<string, string>>(sp =>
 {
-    var result = consumer.Consume();
-    Console.WriteLine($"Received: {result.Message.Value} (key: {result.Message.Key})");
-}
+    var config = sp.GetRequiredService<ProducerConfig>();
+    return new ProducerBuilder<string, string>(config).Build();
+});
+
+builder.Services.AddScoped<IKafkaProducerService, KafkaProducerService>();
+
+// -----------------------
+// Register Consumer Service
+// -----------------------
+builder.Services.AddHostedService<KafkaConsumerService>();
+
+// Create the app
+var app = builder.Build();
+
+// Endpoint to send a Kafka message
+app.MapGet("/send/{msg}", async (string msg, IKafkaProducerService kafka) =>
+{
+    await kafka.SendAsync(msg);
+    return $"Message sent: {msg}";
+});
+
+app.MapGet("/", () => "Kafka Producer + Consumer is running!");
+
+app.Run();
 
