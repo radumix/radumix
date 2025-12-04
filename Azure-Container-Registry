@@ -1,0 +1,102 @@
+[ Developer Code ]
+       |
+       v
+[ ASP.NET Web API ]
+       |
+       v
+[ Docker Build → Container Image ]
+       |
+       v
+[ Push → Azure Container Registry (ACR) ]
+       |
+       v
+[ AKS pulls Image → Pods run API ]
+       |
+       v
+[ Service exposes Public IP → Client calls API ]
+
+
+Create Dockerfile
+# Base image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet publish -c Release -o /app/publish
+
+# Final stage
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "MyApi.dll"]
+
+Build and Push Docker Image to ACR
+1️⃣ Build Docker image
+docker build -t myapi:1.0 .
+
+Create Azure Container Registry (ACR)
+az acr create --resource-group MyResourceGroup --name MyRegistry --sku Basic
+
+login and Tag
+az acr login --name MyRegistry
+docker tag myapi:1.0 myregistry.azurecr.io/myapi:1.0
+
+push to ACR
+docker push myregistry.azurecr.io/myapi:1.0
+
+Create AKS Cluster
+az aks create \
+  --resource-group MyResourceGroup \
+  --name MyAKSCluster \
+  --node-count 2 \
+  --enable-addons monitoring \
+  --generate-ssh-keys
+
+Connect kubectl to AKS
+az aks get-credentials --resource-group MyResourceGroup --name MyAKSCluster
+kubectl get nodes
+
+Deploy Container to AKS
+1️⃣ Create Kubernetes Deployment YAML (deployment.yaml)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapi-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapi
+  template:
+    metadata:
+      labels:
+        app: myapi
+    spec:
+      containers:
+      - name: myapi
+        image: myregistry.azurecr.io/myapi:1.0
+        ports:
+        - containerPort: 80
+
+Create Kubernetes Service YAML (service.yaml) to expose API
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapi-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+Apply to AKS
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get service myapi-service
