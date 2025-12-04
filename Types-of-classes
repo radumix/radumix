@@ -1,0 +1,103 @@
+Types of classes:
+1. Concrete Class
+A regular class that can be instantiated.
+Contains implementation for all its members.
+public class Car {
+    public void Drive() {
+        Console.WriteLine("Driving...");
+    }
+}
+
+2. Abstract Class
+Cannot be instantiated directly.
+Can contain both abstract methods (without implementation) and concrete methods (with implementation).
+Used as a base class.
+public abstract class Animal {
+  public abstract void MakeSound();
+  public void Sleep(string animal) {
+        Console.WriteLine($"{animal} is sleeping...");
+    }}
+public class Dog : Animal {
+    public override void MakeSound() {
+        Console.WriteLine("Woof!");
+    }
+}
+ 
+public class Cat : Animal {
+    public override void MakeSound() {
+        Console.WriteLine("Meow!");
+    }
+}
+
+usage:
+            Animal myDog = new Dog();
+            Animal myCat = new Cat();
+ 
+            myDog.MakeSound(); // O3utputs: Woof!
+            myCat.MakeSound(); // Outputs: Meow!
+                       
+            myCat.Sleep("Cat"); // cat sleeping
+            myDog.Sleep("Dog"); // dog sleeping
+
+3. Static Class
+Cannot be instantiated or inherited.
+All members must be static.
+Useful for utility or helper methods.
+public static class MathHelper {
+    public static int Add(int a, int b) => a + b;
+}
+
+4. Partial Class
+Allows a class to be split across multiple files.
+Useful in large projects or when using code generation tools.
+// File1.cs
+public partial class Person {
+    public string Name { get; set; }
+}
+
+// File2.cs
+public partial class Person {
+    public void Speak() {
+        Console.WriteLine("Hello!");
+    }
+}
+
+5. Sealed Class
+Cannot be inherited.
+Used to prevent further derivation.
+public sealed class Logger {
+    public void Log(string message) {
+        Console.WriteLine(message);
+    }
+}
+
+6. Generic Class
+Allows the class to operate on different data types without rewriting code.
+public class Box<T>
+{
+    private T content;
+
+    public void Pack(T item)
+    {
+        content = item;
+    }
+
+    public T Unpack()
+    {
+        return content;
+    }
+}
+
+
+static void Main()
+    {
+        // Box for an integer
+        Box<int> intBox = new Box<int>();
+        intBox.Pack(123);
+        Console.WriteLine("Unpacked int: " + intBox.Unpack());
+
+        // Box for a string
+        Box<string> stringBox = new Box<string>();
+        stringBox.Pack("Hello");
+        Console.WriteLine("Unpacked string: " + stringBox.Unpack());
+    }
