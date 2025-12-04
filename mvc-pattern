@@ -6,3 +6,4 @@ Model: Handles the data and business logic (like database access).
 Controller: Defines the API endpoints. It receives HTTP requests, interacts with the Model, and returns data.
 
 View: The View is the JSON (or XML) response returned to the client.
+0288879188
