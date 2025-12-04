@@ -3,19 +3,26 @@
 🟧 3. Azure Kubernetes Service (AKS) - Container orchestration platform for running microservices. You deploy containerized APIs here.
 🟨 4. Azure API Management (APIM) - Not a hosting platform — it’s an API gateway. It sits in front of your APIs (App Service, Functions, AKS).
 
-Azure is a cloud computing platform provided by Microsoft that offers a variety of services to help individuals and organizations build, deploy, and manage applications and services through Microsoft-managed data centers.
+Azure is a cloud computing platform provided by Microsoft that offers a variety of services to help individuals and organizations build, deploy, and manage 
+applications and services through Microsoft-managed data centers.
 
 Azure Service Bus: Azure Service Bus is a messaging service that facilitates communication between applications and services. 
 
 Azure Functions: Azure Functions is a serverless compute service that enables developers to build and deploy event-driven functions in the cloud. 
 
-Azure Logic Apps is a cloud-based service provided by Microsoft Azure that allows you to automate workflows and integrate applications, data, and services across various systems and platforms. It’s a powerful tool for creating complex workflows and orchestrations without writing code, using a visual designer and pre-built connectors.
+Azure Logic Apps is a cloud-based service provided by Microsoft Azure that allows you to automate workflows and integrate applications, data, and services 
+across various systems and platforms. It’s a powerful tool for creating complex workflows and orchestrations without writing code, using a visual designer and pre-built connectors.
 
 Azure Pipeline:
-Azure Pipelines is a cloud service that automates the build, test, and deployment of applications, supporting continuous integration (CI) and continuous delivery (CD). It works with various programming languages and platforms, integrates with version control systems like GitHub and Azure Repos, and automates workflows for efficient application delivery.
+Azure Pipelines is a cloud service that automates the build, test, and deployment of applications, supporting continuous integration (CI) and continuous delivery (CD). 
+It works with various programming languages and platforms, integrates with version control systems like GitHub and Azure Repos, and automates workflows for efficient application delivery.
 
 Azure Appinsight:
-Azure Application Insights is an APM service that helps monitor the performance, availability, and usage of applications. It provides real-time telemetry data, identifies issues, tracks user behavior, and delivers deep insights into application health, helping to optimize performance and quickly diagnose problems.
+Azure Application Insights is an APM service that helps monitor the performance, availability, and usage of applications. It provides real-time telemetry data, identifies issues, 
+tracks user behavior, and delivers deep insights into application health, helping to optimize performance and quickly diagnose problems.
 
-Azure Virtual Machine:Azure Virtual Machines (VMs) are on-demand, scalable computing resources provided by Microsoft Azure. VMs allow you to run a wide range of operating systems and software in a virtualized environment without needing physical hardware. They provide flexibility for running applications, hosting websites, and performing computational tasks, with the ability to scale up or down based on demand. Azure VMs support various configurations and integrate seamlessly with other Azure services, offering full control over the virtualized infrastructure while providing high availability and security.
+Azure Virtual Machine:Azure Virtual Machines (VMs) are on-demand, scalable computing resources provided by Microsoft Azure. VMs allow you to run a wide range of operating 
+systems and software in a virtualized environment without needing physical hardware. They provide flexibility for running applications, hosting websites, and performing computational
+tasks, with the ability to scale up or down based on demand. Azure VMs support various configurations and integrate seamlessly with other Azure services, offering full control over t
+he virtualized infrastructure while providing high availability and security.
  
