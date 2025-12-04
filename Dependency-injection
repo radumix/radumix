@@ -1,5 +1,3 @@
----
-What DI:
 Dependency Injection (DI) is a design pattern widely used in software development, including in C#. It is a technique where the dependencies of a class are injected from the outside rather than being created within the class itself. This helps to achieve better separation of concerns and makes the code more modular, testable, and maintainable.
 
 Transient Lifetime: In this lifetime, a new instance of the dependency is created every time it is requested from the DI container. This means that each time you request a service, you get a new instance. Transient lifetime is suitable for lightweight, stateless services or components.
