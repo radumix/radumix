@@ -1,0 +1,10 @@
+Asynchronous methods in C# use the async and await keywords to:
+Run tasks in the background.
+Keep the UI responsive (in desktop or web apps).
+Improve scalability (in web apps like ASP.NET).
+---Before async/await (introduced in C# 5.0), developers used:
+    1. Callbacks / Delegates
+client.DownloadStringCompleted += (s, e) => {
+    string result = e.Result;
+};
+client.DownloadStringAsync(new Uri("https://example.com"));
