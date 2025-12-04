@@ -143,3 +143,12 @@ app.MapGet("/send/{msg}", async (string msg, IKafkaProducerService kafka) =>
 app.MapGet("/", () => "Kafka Producer + Consumer is running!");
 
 app.Run();
+
+
+
+
+
+
+
+
+
