@@ -1,0 +1,21 @@
+Azure Load Balancer:
+Optional Configurations You Can Do (If Needed)
+While Azure handles most things automatically. 
+You can customize:
+1. Autoscaling Rules
+
+Set thresholds (e.g., scale out when CPU > 70%)
+Define min/max instance counts
+
+2. Health Checks
+
+Configure endpoints to monitor service health
+Helps Azure remove unhealthy instances from rotation
+
+3. Traffic Routing (Advanced)
+
+Use Azure Front Door or Application Gateway for:
+
+Geo-routing
+SSL termination
+Custom traffic rules
