@@ -1,0 +1,5 @@
+.NET Garbage Collector is part of the Common Language Runtime (CLR). Its main job is to:
+
+Free up memory used by objects that are no longer accessible.
+Prevent memory leaks by ensuring unused objects are cleaned up.
+Optimize memory usage so your application runs efficiently.
