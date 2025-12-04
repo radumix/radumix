@@ -1,0 +1,29 @@
+1. ViewData
+✔️ Works only for current request
+✔️ Key/value dictionary
+✔️ Requires casting
+✔️ Used to pass data from Controller → View
+ViewData["Message"] = "Hello ViewData";
+return View();
+in the View:
+@ViewData["Message"]
+
+2. ViewBag
+✔️ Works only for current request
+✔️ Uses dynamic object
+✔️ No casting required
+✔️ Just a wrapper around ViewData
+ViewBag.Message = "Hello ViewBag";
+return View();
+In the View:
+@ViewBag.Message
+
+3. TempData
+✔️ Persists across requests
+✔️ Used for RedirectToAction scenarios
+✔️ Good for showing success/error messages
+✔️ Uses session storage under the hood
+TempData["Success"] = "Saved!";
+return RedirectToAction("Index");
+In the next request:
+@TempData["Success"]
