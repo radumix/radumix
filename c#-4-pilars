@@ -1,4 +1,11 @@
-c# 4 pilars: Abstraction, Encapsulation, Inheritance, Polymorphism
+bject-Oriented Programming (OOP)
+What it is: A programming paradigm based on the concept of "objects" which contain data and behavior.
+
+c# 4 pilars: Abstraction, Encapsulation, Inheritance, Polymorphism -> you can call it principle or cencept
+ -> 
+Access modifiers are keywords used to specify the accessibility or visibility of classes, methods, and other members.
+
+The keywords public, private, protected, and internal in C# are called access modifiers.
 
 1. What Is Encapsulation:
 Encapsulation is a process of binding data members (variables, properties) and member functions (methods) together. In object oriented programming language we achieve encapsulation through Class.
