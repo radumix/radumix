@@ -1,5 +1,4 @@
-Solid principle:
-
+Solid principle: 
 Single Responsibility Principle (SRP):
 Definition: A class should have only one reason to change, meaning it should have only one job or responsibility.
 Implementation: Break down large classes that handle multiple responsibilities into smaller, more focused classes. For example, instead of having a single UserService class that handles both user authentication and user profile management, create separate classes for UserAuthenticationService and UserProfileService.
@@ -15,5 +14,3 @@ Implementation: Split large interfaces into smaller, more specific ones so that 
 Dependency Inversion Principle (DIP):
 Definition: High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
 Implementation: Use dependency injection to invert the control of dependencies.
-
-Server=localhost\SQLEXPRESS01;Database=master;Trusted_Connection=True;
