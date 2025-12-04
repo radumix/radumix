@@ -1,0 +1,59 @@
+In ASP.NET C#, coupling refers to the degree of dependence between classes, modules, or components in an application. It's a concept from software design that measures how tightly 
+connected different parts of your code are.
+1. Definition
+Coupling: How much one class/module relies on another.
+Low (Loose) Coupling: Classes are independent; changes in one class rarely affect others.
+High (Tight) Coupling: Classes are heavily dependent; changes in one class can break others.
+
+2. Why It Matters
+Maintainability: Loosely coupled code is easier to modify.
+Reusability: Loosely coupled components can be reused in different projects.
+Testability: Loosely coupled code is easier to unit test.
+
+Types of Coupling
+Tight Coupling
+Example: Directly instantiating another class inside your class.
+public class OrderService
+{
+    private PaymentService paymentService = new PaymentService(); // tightly coupled
+    public void ProcessOrder() 
+    {
+        paymentService.Pay();
+    }
+}
+
+Loose Coupling
+Achieved using interfaces, dependency injection, or events.
+public interface IPaymentService
+{
+    void Pay();
+}
+
+public class PaymentService : IPaymentService
+{
+    public void Pay() { /* implementation */ }
+}
+
+public class OrderService
+{
+    private readonly IPaymentService _paymentService;
+    public OrderService(IPaymentService paymentService)
+    {
+        _paymentService = paymentService; // loosely coupled
+    }
+    public void ProcessOrder() 
+    {
+        _paymentService.Pay();
+    }
+}
+Now, OrderService depends on an interface, not a concrete class.
+You can easily swap PaymentService with another implementation.
+
+
+4. In ASP.NET C# Context
+Controllers, Services, and Repositories should be loosely coupled.
+Use Dependency Injection (DI) to reduce coupling.
+Helps in:
+Writing unit tests.
+Making code changes without breaking other parts.
+Following SOLID principles, especially the Dependency Inversion Principle (DIP).
