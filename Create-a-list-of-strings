@@ -1,0 +1,21 @@
+  Create a list of strings c#
+        List<string> fruits = new List<string>();
+        Add items to the list
+        fruits.Add("Apple");
+        fruits.Add("Banana");
+        fruits.Add("Mango");
+        // Access items in the list
+        Console.WriteLine("First fruit: " + fruits[0]);
+
+        Loop through the list
+        Console.WriteLine("All fruits:");
+        foreach (string fruit in fruits)
+        {
+            Console.WriteLine(fruit);
+        }
+
+        Remove an item
+        fruits.Remove("Banana");
+
+        // Count items
+        Console.WriteLine("Number of fruits: " + fruits.Count);
