@@ -1,3 +1,8 @@
+🟦 1. Azure App Service - Managed platform for web apps, APIs, and MVC apps.
+🟩 2. Azure Functions - Serverless, event-driven endpoints. Can be triggered by HTTP, timer, queue, blob, etc.
+🟧 3. Azure Kubernetes Service (AKS) - Container orchestration platform for running microservices. You deploy containerized APIs here.
+🟨 4. Azure API Management (APIM) - Not a hosting platform — it’s an API gateway. It sits in front of your APIs (App Service, Functions, AKS).
+
 Azure is a cloud computing platform provided by Microsoft that offers a variety of services to help individuals and organizations build, deploy, and manage applications and services through Microsoft-managed data centers.
 
 Azure Service Bus: Azure Service Bus is a messaging service that facilitates communication between applications and services. 
