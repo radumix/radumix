@@ -1,0 +1,12 @@
+Cookies: 
+"In a .NET API, I implement cookies using the HttpContext.Response.Cookies.Append method to set cookies, and HttpContext.Request.Cookies to read them. I typically use persistent, secure, and HttpOnly cookies to store non-sensitive session-related data or tokens.
+
+For example, I might store a session ID or a CSRF token in a cookie like this:
+
+HttpContext.Response.Cookies.Append("SessionId", sessionId, new CookieOptions
+{
+    HttpOnly = true,
+    Secure = true,
+    SameSite = SameSiteMode.Strict,
+    Expires = DateTimeOffset.UtcNow.AddDays(7)
+});
