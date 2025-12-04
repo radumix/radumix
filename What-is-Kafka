@@ -1,0 +1,83 @@
+What is Kafka?
+
+Kafka is built around a few core ideas:
+
+1. Topics
+Logical channels where messages (“events”) are stored.
+2. Producers
+Applications that write messages to topics.
+3. Consumers
+Applications that read messages from topics.
+4. Brokers
+Kafka servers that store and distribute events.
+5. Partitions
+Each topic is split into partitions for parallelism and scalability.
+6. Consumer Groups
+Allow multiple consumers to share the work.
+-------------------
+in .NET
+Confluent.Kafka
+NuGet: Confluent.Kafka
+dotnet add package Confluent.Kafka
+2. Create a Producer (send messages)
+using Confluent.Kafka;
+
+var config = new ProducerConfig
+{
+    BootstrapServers = "localhost:9092"
+};
+
+using var producer = new ProducerBuilder<string, string>(config).Build();
+
+while (true)
+{
+    Console.Write("Enter message: ");
+    var value = Console.ReadLine();
+
+    var message = new Message<string, string> { Key = "key1", Value = value };
+
+    var result = await producer.ProduceAsync("demo-topic", message);
+
+    Console.WriteLine($"Sent '{value}' to partition {result.Partition} at offset {result.Offset}");
+}
+using Confluent.Kafka;
+
+var config = new ConsumerConfig
+{
+    BootstrapServers = "localhost:9092",
+    GroupId = "demo-group",
+    AutoOffsetReset = AutoOffsetReset.Earliest
+};
+
+using var consumer = new ConsumerBuilder<string, string>(config).Build();
+
+consumer.Subscribe("demo-topic");
+
+Console.WriteLine("Listening...");
+
+while (true)
+{
+    var result = consumer.Consume();
+    Console.WriteLine($"Received: {result.Message.Value} (key: {result.Message.Key})");
+}
+using Confluent.Kafka;
+
+var config = new ConsumerConfig
+{
+    BootstrapServers = "localhost:9092",
+    GroupId = "demo-group",
+    AutoOffsetReset = AutoOffsetReset.Earliest
+};
+
+using var consumer = new ConsumerBuilder<string, string>(config).Build();
+
+consumer.Subscribe("demo-topic");
+
+Console.WriteLine("Listening...");
+
+while (true)
+{
+    var result = consumer.Consume();
+    Console.WriteLine($"Received: {result.Message.Value} (key: {result.Message.Key})");
+}
+
