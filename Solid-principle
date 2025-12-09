@@ -1,17 +1,24 @@
 Solid principle: 
 Single Responsibility Principle (SRP):
-Definition: A class should have only one reason to change, meaning it should have only one job or responsibility.
-Implementation: Break down large classes that handle multiple responsibilities into smaller, more focused classes. For example, instead of having a 
-single UserService class that handles both user authentication and user profile management, create separate classes for UserAuthenticationService and UserProfileService.
+Definition: A class should have only one reason to change, 
+meaning it should have only one job or responsibility.
+Implementation: Break down large classes that handle multiple responsibilities 
+into smaller, more focused classes. For example, instead of having a 
+single UserService class that handles both user authentication and user profile
+management, create separate classes for UserAuthenticationService and UserProfileService.
 
 Open/Closed Principle (OCP):
-Definition: Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
-Implementation: Use abstraction and inheritance. For example, create an interface for payment processing and extend it for different payment methods without changing the existing code.
+Definition: Software entities (classes, modules, functions, etc.) should be
+open for extension but closed for modification.
+Implementation: Use abstraction and inheritance. For example, create an interface
+for payment processing and extend it for different payment methods without changing the existing code.
 
 Interface Segregation Principle (ISP):
 Definition: No client should be forced to depend on methods it does not use.
-Implementation: Split large interfaces into smaller, more specific ones so that clients only need to know about the methods that are of interest to them.
+Implementation: Split large interfaces into smaller, more specific ones so that 
+clients only need to know about the methods that are of interest to them.
 
 Dependency Inversion Principle (DIP):
-Definition: High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+Definition: High-level modules should not depend on low-level modules. Both should 
+depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
 Implementation: Use dependency injection to invert the control of dependencies.
