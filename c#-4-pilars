@@ -8,7 +8,8 @@ Access modifiers are keywords used to specify the accessibility or visibility of
 The keywords public, private, protected, and internal in C# are called access modifiers.
 
 1. What Is Encapsulation:
-Encapsulation is a process of binding data members (variables, properties) and member functions (methods) together. In object oriented programming language we achieve encapsulation through Class.
+Encapsulation is a process of binding data members (variables, properties) and member 
+functions (methods) together. In object oriented programming language we achieve encapsulation through Class.
 
 Public Class Account  
 {  
@@ -30,7 +31,8 @@ public static void Main()
 
 
 2. What Is Abstraction:
-Abstraction is the process of showing only essential/necessary features of an entity/object to the outside world and hide the other irrelevant information.
+Abstraction is the process of showing only essential/necessary features of an entity/object
+to the outside world and hide the other irrelevant information.
 
 class Car  
 {  
