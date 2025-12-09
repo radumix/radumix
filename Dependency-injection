@@ -1,18 +1,27 @@
-Dependency Injection (DI) is a design pattern widely used in software development, including in C#. It is a technique where the dependencies of a class are injected from the 
-outside rather than being created within the class itself. This helps to achieve better separation of concerns and makes the code more modular, testable, and maintainable.
+Dependency Injection (DI) is a design pattern widely used in software development, including in C#. 
+It is a technique where the dependencies of a class are injected from the 
+outside rather than being created within the class itself. This helps to achieve better separation 
+of concerns and makes the code more modular, testable, and maintainable.
 
-Transient Lifetime: In this lifetime, a new instance of the dependency is created every time it is requested from the DI container. This means that each time you request a
+Transient Lifetime: In this lifetime, a new instance of the dependency is created every time it
+is requested from the DI container. This means that each time you request a
 service, you get a new instance. Transient lifetime is suitable for lightweight, stateless services or components.
 
-Singleton Lifetime: With singleton lifetime, only one instance of the dependency is created and reused throughout the application's lifetime. Subsequent requests for 
-the same dependency will return the same instance. This is useful for services that are stateful and need to maintain state across the application.
+Singleton Lifetime: With singleton lifetime, only one instance of the dependency is created
+and reused throughout the application's lifetime. Subsequent requests for 
+the same dependency will return the same instance. This is useful for services that are 
+stateful and need to maintain state across the application.
 
-Scoped Lifetime: Scoped lifetime creates a new instance of the dependency per scope. A scope typically corresponds to a web request in a web application. So, 
+Scoped Lifetime: Scoped lifetime creates a new instance of the dependency per scope. A 
+scope typically corresponds to a web request in a web application. So, 
 
-within the same web request, the same instance of the dependency is reused, but different requests get different instances. Scoped lifetime is commonly used 
-in web applications to manage dependencies that need to be shared within a single request but isolated across different requests.
+within the same web request, the same instance of the dependency is reused, but 
+different requests get different instances. Scoped lifetime is commonly used 
+in web applications to manage dependencies that need to be shared within a single 
+request but isolated across different requests.
 
-In C#, dependency injection is often implemented using constructor injection, method injection, or property injection. Let's focus on constructor injection as it's one of the most common approaches.
+In C#, dependency injection is often implemented using constructor injection, 
+method injection, or property injection. Let's focus on constructor injection as it's one of the most common approaches.
 
 Here's a simple example to illustrate constructor injection in C#:
 
